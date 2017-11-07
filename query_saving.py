@@ -35,18 +35,23 @@ def save_part_of_data(ids, path=path_to, name_of_file=name_of_file,i = 0):
                 jsons.append(data)
         except:
             time.sleep(10)
-            
-    json.dump(jsons, open('{}/{}_{}.json'.format(path, name_of_file, i), 'w'))
+    f = open('{}/{}_{}.txt'.format(path, name_of_file, i), 'a')
+    for js in jsons:        
+        f.write(json.dumps(js, f))
 
 
-# Скачиваю данные по кусочкам
+#saving
 for i, part_i in enumerate(range(0, len(ids), step)):
     print('{}/{}'.format(i, len(ids) // step))
+    if i == 5:
+        break 
     save_part_of_data(ids[part_i:part_i + step], path_to, name_of_file, i)
         
-# Склеиваю в один большой json
-jsons = []
-for file in os.listdir(path_to):
-    jsons.extend(json.load(open('{}/{}'.format(path_to, file), 'r')))
-json.dump(jsons, open('{}.json'.format(name_of_file), 'w'))
+#merging
+filenames = ['{}/{}'.format(path_to, x) for x in os.listdir(path_to)]
 
+with open('{}.txt'.format(name_of_file), 'w') as outfile:
+    for fname in filenames:
+        with open(fname) as infile:
+            for line in infile:
+                outfile.write(line)
