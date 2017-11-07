@@ -11,7 +11,7 @@ parser = argparse.ArgumentParser(description='Process query saving by ids.')
 parser.add_argument('--ids', default='otvety_cooking_id.txt')
 parser.add_argument('--path_to', default='jsons/')
 parser.add_argument('--name_of_file', default='cooking')
-parser.add_argument('--step', default='10')
+parser.add_argument('--step', default='1000')
 
 
 args = parser.parse_args()
