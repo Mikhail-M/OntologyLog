@@ -11,7 +11,7 @@ parser = argparse.ArgumentParser(description='Process query saving by ids.')
 parser.add_argument('--ids', default='otvety_cooking_id.txt')
 parser.add_argument('--path_to', default='jsons/')
 parser.add_argument('--name_of_file', default='cooking')
-parser.add_argument('--step', default='1000')
+parser.add_argument('--step', default='10')
 
 
 args = parser.parse_args()
@@ -28,7 +28,7 @@ mail_ru_template = "https://otvet.mail.ru/api/v2/question?qid={}"
 
 def save_part_of_data(ids, path=path_to, name_of_file=name_of_file,i = 0):
     jsons = []
-    for i, id_ in enumerate(ids): 
+    for id_ in ids: 
         try:
             with urllib.request.urlopen(mail_ru_template.format(id_)) as url:
                 data = json.loads(url.read().decode())
