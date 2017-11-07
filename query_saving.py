@@ -43,8 +43,6 @@ def save_part_of_data(ids, path=path_to, name_of_file=name_of_file,i = 0):
 #saving
 for i, part_i in enumerate(range(0, len(ids), step)):
     print('{}/{}'.format(i, len(ids) // step))
-    if i == 5:
-        break 
     save_part_of_data(ids[part_i:part_i + step], path_to, name_of_file, i)
         
 #merging
