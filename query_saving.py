@@ -12,7 +12,7 @@ parser.add_argument('--ids', default='otvety_cooking_id.txt')
 parser.add_argument('--path_to', default='cooking_jsons/')
 parser.add_argument('--name_of_file', default='cooking')
 parser.add_argument('--step', default='1000')
-
+parser.add_argument('--mode', default='release')
 
 args = parser.parse_args()
 
@@ -20,6 +20,7 @@ ids_path = args.ids
 name_of_file = args.name_of_file
 path_to = args.path_to
 step = int(args.step)
+debug = True if args.mode == 'debug' else False
 
 create_if_not_exist(path_to)
 
@@ -43,8 +44,9 @@ def save_part_of_data(ids, path=path_to, name_of_file=name_of_file,i = 0):
 #saving
 for i, part_i in enumerate(range(0, len(ids), step)):
     print('{}/{}'.format(i, len(ids) // step))
-    if i == 5:
+    if debug and i == 5:
         break
+    
     save_part_of_data(ids[part_i:part_i + step], path_to, name_of_file, i)
         
 #merging
