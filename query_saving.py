@@ -9,7 +9,7 @@ from utils import *
 
 parser = argparse.ArgumentParser(description='Process query saving by ids.')
 parser.add_argument('--ids', default='otvety_cooking_id.txt')
-parser.add_argument('--path_to', default='jsons/')
+parser.add_argument('--path_to', default='cooking_jsons/')
 parser.add_argument('--name_of_file', default='cooking')
 parser.add_argument('--step', default='1000')
 
@@ -37,12 +37,14 @@ def save_part_of_data(ids, path=path_to, name_of_file=name_of_file,i = 0):
             time.sleep(10)
     f = open('{}/{}_{}.txt'.format(path, name_of_file, i), 'a')
     for js in jsons:        
-        f.write(json.dumps(js, f))
+        f.write(json.dumps(js, f) + '\n')
 
 
 #saving
 for i, part_i in enumerate(range(0, len(ids), step)):
     print('{}/{}'.format(i, len(ids) // step))
+    if i == 5:
+        break
     save_part_of_data(ids[part_i:part_i + step], path_to, name_of_file, i)
         
 #merging
